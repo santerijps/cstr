@@ -456,4 +456,36 @@
     return index;
   }
 
+  int StartsWithString(struct String s, struct String search)
+  {
+    if (search.length > s.length)
+    {
+      return 0;
+    }
+    for (size_t i = 0; i < search.length; i++)
+    {
+      if (s.value[i] != search.value[i])
+      {
+        return 0;
+      }
+    }
+    return 1;
+  }
+
+  int EndsWithString(struct String s, struct String search)
+  {
+    if (search.length > s.length)
+    {
+      return 0;
+    }
+    for (size_t i = 0; i < search.length; i++)
+    {
+      if (s.value[s.length - search.length + i] != search.value[i])
+      {
+        return 0;
+      }
+    }
+    return 1;
+  }
+
 #endif
