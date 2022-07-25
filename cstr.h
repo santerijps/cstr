@@ -508,4 +508,40 @@
     return sv;
   }
 
+  inline int CharIsWhitespace(char c)
+  {
+    return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+  }
+
+  struct String LeftStripString(struct String s)
+  {
+    size_t i;
+    for (i = 0; i < s.length; i++)
+    {
+      if (!CharIsWhitespace(s.value[i]))
+      {
+        break;
+      }
+    }
+    return SubString(s, i, s.length);
+  }
+
+  struct String RightStripString(struct String s)
+  {
+    size_t i;
+    for (i = s.length - 1; i > 0; i--)
+    {
+      if (!CharIsWhitespace(s.value[i]))
+      {
+        break;
+      }
+    }
+    return SubString(s, 0, i + 1);
+  }
+
+  struct String StripString(struct String s)
+  {
+    return RightStripString(LeftStripString(s));
+  }
+
 #endif
