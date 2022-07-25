@@ -258,7 +258,8 @@
           if (found)
           {
             AppendString(&sv, SubString(s, start, i));
-            start = ++i;
+            i += sep.length - 1;
+            start = i + 1;
           }
         }
       }
@@ -341,19 +342,6 @@
     return title;
   }
 
-  struct StringVector Slice(struct StringVector *sv, int start, int stop)
-  {
-    struct StringVector slice = NewStringVector();
-    if (start >= 0 && start < sv->length)
-    {
-      for (size_t i = start; i < stop && i < sv->length; i++)
-      {
-        AppendString(&slice, sv->values[i]);
-      }
-    }
-    return slice;
-  }
-
   struct String JoinLiteral(struct StringVector *sv, const char *delim)
   {
     struct String s;
@@ -376,6 +364,41 @@
   inline struct String JoinString(struct StringVector *sv, struct String s)
   {
     return JoinLiteral(sv, s.value);
+  }
+
+  struct String ReplaceString(struct String s, struct String search, struct String replace)
+  {
+    if (search.length > s.length)
+    {
+      return s;
+    }
+    struct StringVector split = SplitString(s, search);
+    struct String join = JoinString(&split, replace);
+    return join;
+  }
+
+  struct String ReplaceLiteral(struct String s, char *search, char *replace)
+  {
+    if (strlen(search) > s.length)
+    {
+      return s;
+    }
+    struct StringVector split = SplitString(s, NewString(search));
+    struct String join = JoinString(&split, NewString(replace));
+    return join;
+  }
+
+  struct StringVector Slice(struct StringVector *sv, int start, int stop)
+  {
+    struct StringVector slice = NewStringVector();
+    if (start >= 0 && start < sv->length)
+    {
+      for (size_t i = start; i < stop && i < sv->length; i++)
+      {
+        AppendString(&slice, sv->values[i]);
+      }
+    }
+    return slice;
   }
 
 #endif
