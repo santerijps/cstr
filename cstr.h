@@ -508,7 +508,7 @@
     return sv;
   }
 
-  inline int CharIsWhitespace(char c)
+  int CharIsWhitespace(char c)
   {
     return c == ' ' || c == '\t' || c == '\n' || c == '\r';
   }
