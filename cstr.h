@@ -411,4 +411,49 @@
     return reversed;
   }
 
+  int FirstIndexOfString(struct String s, struct String search)
+  {
+    int index = -1;
+    if (search.length < s.length) for (size_t i = 0; i < s.length; i++)
+    {
+      int found = 1;
+      for (size_t j = 0; j < search.length; j++)
+      {
+        if (s.value[i + j] != search.value[j])
+        {
+          found = 0;
+          break;
+        }
+      }
+      if (found)
+      {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
+
+  int LastIndexOfString(struct String s, struct String search)
+  {
+    int index = -1;
+    if (search.length < s.length) for (size_t i = 0; i < s.length; i++)
+    {
+      int found = 1;
+      for (size_t j = 0; j < search.length; j++)
+      {
+        if (s.value[i + j] != search.value[j])
+        {
+          found = 0;
+          break;
+        }
+      }
+      if (found)
+      {
+        index = i;
+      }
+    }
+    return index;
+  }
+
 #endif
