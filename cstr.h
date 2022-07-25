@@ -472,6 +472,11 @@
     return 1;
   }
 
+  int StartsWithLiteral(struct String s, char *search)
+  {
+    return StartsWithString(s, NewString(search));
+  }
+
   int EndsWithString(struct String s, struct String search)
   {
     if (search.length > s.length)
@@ -486,6 +491,11 @@
       }
     }
     return 1;
+  }
+
+  int EndsWithLiteral(struct String s, char *search)
+  {
+    return EndsWithString(s, NewString(search));
   }
 
 #endif
