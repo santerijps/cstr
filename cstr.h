@@ -401,4 +401,14 @@
     return slice;
   }
 
+  struct String ReverseString(struct String s)
+  {
+    struct String reversed = CopyString(s);
+    for (size_t i = 0; i < s.length; i++)
+    {
+      reversed.value[s.length - 1 - i] = s.value[i];
+    }
+    return reversed;
+  }
+
 #endif
