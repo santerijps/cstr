@@ -498,4 +498,14 @@
     return EndsWithString(s, NewString(search));
   }
 
+  struct StringVector MakeStringVector(int length, char **values)
+  {
+    struct StringVector sv = NewStringVector();
+    for (size_t i = 0; i < (size_t) length; i++)
+    {
+      AppendLiteral(&sv, values[i]);
+    }
+    return sv;
+  }
+
 #endif
