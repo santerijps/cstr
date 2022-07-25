@@ -93,9 +93,9 @@
   */
   struct String SubString(struct String s, int start, int stop)
   {
-    if (start >= 0 && start < s.length)
+    if (start >= 0 && (size_t) start < s.length)
     {
-      stop = stop <= s.length ? stop : s.length;
+      stop = stop <= (int) s.length ? stop : (int) s.length;
       size_t length = stop - start, i;
       struct String sub;
       sub.length = length;
@@ -271,7 +271,7 @@
     return sv;
   }
 
-  inline struct StringVector SplitLiteral(struct String s, char *sep)
+  struct StringVector SplitLiteral(struct String s, char *sep)
   {
     return SplitString(s, NewString(sep));
   }
@@ -361,7 +361,7 @@
     return s;
   }
 
-  inline struct String JoinString(struct StringVector *sv, struct String s)
+  struct String JoinString(struct StringVector *sv, struct String s)
   {
     return JoinLiteral(sv, s.value);
   }
@@ -391,9 +391,9 @@
   struct StringVector Slice(struct StringVector *sv, int start, int stop)
   {
     struct StringVector slice = NewStringVector();
-    if (start >= 0 && start < sv->length)
+    if (start >= 0 && (size_t) start < sv->length)
     {
-      for (size_t i = start; i < stop && i < sv->length; i++)
+      for (size_t i = start; i < (size_t) stop && i < sv->length; i++)
       {
         AppendString(&slice, sv->values[i]);
       }
