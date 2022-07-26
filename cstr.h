@@ -544,4 +544,9 @@
     return RightStripString(LeftStripString(s));
   }
 
+  int StringEquals(struct String s1, struct String s2)
+  {
+    return strcmp(s1.value, s2.value) == 0;
+  }
+
 #endif
